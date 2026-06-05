@@ -1,7 +1,7 @@
 # Quantum-Enhanced Smart HVAC System
 
 > B.Tech Final Year Project — VIT Vellore | SCOPE | IoT Specialization  
-> Team: 3 members | Guide: [Professor Name]
+> Team: 3 members | Guide: Dr.Jayashree 
 
 ## What This Project Does
 
