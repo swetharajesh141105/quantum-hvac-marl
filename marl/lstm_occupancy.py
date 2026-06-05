@@ -274,8 +274,8 @@ def train_lstm(
     criterion = nn.BCELoss()
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer, patience=5, factor=0.5, verbose=False
-    )
+    optimizer, patience=5, factor=0.5
+)
     
     train_losses, val_losses = [], []
     best_val_loss = float('inf')
