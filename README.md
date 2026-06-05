@@ -163,7 +163,7 @@ quantum-hvac-marl/
 | Member | Role |
 |--------|------|
 | Swetha Rajesh | Digital Twin, MARL, QUBO, FL |
-| Teammate 2 | Hardware, ESP32, Dashboard |
-| Teammate 3 | Integration, Testing, Paper |
+| Dharshinikesan K S | Hardware, ESP32, Dashboard |
+| Harshavardhini | Integration, Testing, Paper |
 
 **VIT Vellore | BCSE — IoT Specialization | 2025–26**
