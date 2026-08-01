@@ -1,8 +1,0 @@
-venv/
-__pycache__/
-*.pyc
-*.npz
-*.png
-training_curves.png
-optimized_schedule.json
-.DS_Store
