@@ -1,0 +1,31 @@
+# config.yaml — single source of truth for all tunable constants.
+# Person A (thermal_model.py) and Person B (hvac_env.py) should read values
+# from here rather than hardcoding numbers in their own files.
+
+room:
+  thermal_mass: 500000          # J/K — effective thermal capacitance of room air + contents
+  insulation_resistance: 2.5    # K/W — higher = better insulated (slower heat exchange with outside)
+  ac_cooling_capacity: 3500     # W   — max cooling power the AC can apply
+
+simulation:
+  duration_hours: 24            # length of one simulated day
+  timestep_seconds: 60          # dt used in each RoomThermalModel.step() call
+  seed: 42                      # default RNG seed for reproducibility
+
+occupancy:
+  start_hour: 9                 # room occupied from this hour...
+  end_hour: 18                  # ...until this hour (9am-6pm default)
+
+outdoor_temp:
+  base_temp_c: 30               # mean outdoor temperature
+  amplitude_c: 6                # swing of the 24h sine wave (peak - mean)
+  peak_hour: 15                 # hour of day outdoor temp peaks (3pm)
+  noise_std_c: 0.5              # gaussian noise std-dev added on top of the sine wave
+
+comfort:
+  target_temp_c: 22             # target/comfortable indoor temperature
+  tolerance_c: 1.5              # +/- band around target considered "comfortable"
+
+co2:
+  baseline_ppm: 420             # placeholder CO2 baseline (outdoor/ambient level)
+  occupied_increment_ppm: 300   # placeholder bump applied while room is occupied
