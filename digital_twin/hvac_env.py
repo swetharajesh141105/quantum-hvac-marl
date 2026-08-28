@@ -28,11 +28,13 @@ class HVACEnv(gym.Env):
         self.t += 1
         done = self.t >= self.episode_length
 
+        # normalized, balanced reward components (fixes reward collapse)
         energy_penalty = -1.0 * action
-        comfort_penalty = -abs(self.temp - 24.0)
-        carbon_penalty = -0.5 * action
+        comfort_penalty = -np.clip(abs(self.temp - 24.0) / 5.0, 0, 2.0)
+        carbon_penalty = -0.3 * action
 
-        reward = energy_penalty + comfort_penalty + carbon_penalty
+        reward = (0.4 * energy_penalty) + (0.4 * comfort_penalty) + (0.2 * carbon_penalty)
+
         return self._get_obs(), reward, done, False, {
             "energy": energy_penalty, "comfort": comfort_penalty, "carbon": carbon_penalty
         }
