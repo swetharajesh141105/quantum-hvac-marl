@@ -8,7 +8,6 @@ import gymnasium as gym
 from gymnasium import spaces
 import numpy as np
 from lstm_occupancy import predict_occupancy_30min
-from tensorflow import keras
 
 class SingleObjectiveWrapper(gym.Wrapper):
     """Wraps HVACEnv so one agent only sees its own reward component."""
@@ -35,9 +34,9 @@ def train_agent(objective, timesteps=8000):
     return model
 
 
-def joint_decision(temp, outdoor_temp, occupancy, t, agents):
+def joint_decision(temp, outdoor_temp, occupancy, t, agents, co2=400.0):
     """Simple voting: majority of agents decide ON/OFF."""
-    obs = np.array([temp, outdoor_temp, occupancy, t], dtype=np.float32)
+    obs = np.array([temp, outdoor_temp, occupancy, t, co2], dtype=np.float32)
     votes = [agent.predict(obs, deterministic=True)[0] for agent in agents.values()]
     return int(sum(votes) >= 2)  # majority vote
 
