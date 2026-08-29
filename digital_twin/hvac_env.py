@@ -21,7 +21,7 @@ class HVACEnv(gym.Env):
         self.temp = 30.0
         self.outdoor_temp = 35.0
         self.occupancy = 1
-        self.co2 = 400.0  # placeholder CO2 ppm value
+        self.co2 = 400.0
         return self._get_obs(), {}
 
     def _get_obs(self):

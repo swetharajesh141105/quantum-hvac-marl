@@ -25,9 +25,9 @@ ROOM_PARAMS = {
     "occupancy_heat_gain": 0.5,
 }
 
-def train_agent(objective, timesteps=5000):
+def train_agent(objective, timesteps=8000):
     env = SingleObjectiveWrapper(HVACEnv(ROOM_PARAMS), objective)
-    model = PPO("MlpPolicy", env, verbose=1)
+    model = PPO("MlpPolicy", env, verbose=1, ent_coef=0.01)  # ent_coef keeps exploration alive
     model.learn(total_timesteps=timesteps)
     model.save(f"{objective}_agent")
     return model
