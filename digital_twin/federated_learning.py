@@ -16,7 +16,7 @@ BUILDING_PARAMS = [
 ]
 
 NUM_ROUNDS = 5
-LOCAL_TIMESTEPS = 2000
+LOCAL_TIMESTEPS = 5000  # more training per round
 
 def create_local_model(objective, room_params, init_state_dict=None):
     env = SingleObjectiveWrapper(HVACEnv(room_params), objective)
