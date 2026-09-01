@@ -1,1 +1,3 @@
-*.zip binary *.pt binary *.pth binary 
+*.zip binary
+*.pt binary
+*.pth binary

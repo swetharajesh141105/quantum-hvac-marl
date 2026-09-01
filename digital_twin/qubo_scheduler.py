@@ -10,7 +10,7 @@ import dimod
 from dwave.samplers import SimulatedAnnealingSampler
 from stable_baselines3 import PPO
 from hvac_env import HVACEnv
-from marl_agents import joint_decision
+from marl_agents import joint_decision, robust_load
 from data_gen import generate_day_profile
 
 HOURS = 24
@@ -18,7 +18,7 @@ HOURS = 24
 def load_federated_agents():
     agents = {}
     for obj in ["energy", "comfort", "carbon"]:
-        agents[obj] = PPO.load(f"{obj}_agent_federated")
+        agents[obj] = robust_load(obj)
     return agents
 
 def get_preferred_actions(agents):

@@ -38,6 +38,25 @@ ROOM_PARAMS = {
     "occupancy_heat_gain": 0.5,
 }
 
+def robust_load(objective, suffix="_agent_federated"):
+    """Workaround for a Windows-specific bug where PPO.load() fails to read
+    the checkpoint zip via its internal stream-based reader. This manually
+    extracts to a real temp file on disk and loads from a plain file path
+    instead, which works reliably."""
+    import zipfile, tempfile, os
+    import torch
+
+    zip_path = f"{objective}{suffix}.zip"
+    tmpdir = tempfile.mkdtemp()
+    with zipfile.ZipFile(zip_path) as z:
+        z.extractall(tmpdir)
+
+    env = SingleObjectiveWrapper(HVACEnv(ROOM_PARAMS), objective)
+    model = PPO("MlpPolicy", env, verbose=0)
+    policy_state = torch.load(os.path.join(tmpdir, "policy.pth"), map_location="cpu", weights_only=True)
+    model.policy.load_state_dict(policy_state)
+    return model
+
 
 def train_agent(objective, timesteps=15000, seed=42):
     env = SingleObjectiveWrapper(HVACEnv(ROOM_PARAMS), objective)
@@ -64,6 +83,36 @@ def joint_decision(temp, outdoor_temp, occupancy, t, agents, co2=400.0,
     return action
 
 
+def joint_decision_verbose(temp, outdoor_temp, occupancy, t, agents, co2=400.0,
+                            comfort_high=27.0, comfort_low=21.0):
+    """Same logic as joint_decision, but also returns WHY the decision was
+    made — per-agent votes, weighted score, and whether the hard comfort
+    override fired. Used by xai_explainer.py to generate plain-English
+    explanations without duplicating the decision logic."""
+    obs = np.array([temp, outdoor_temp, occupancy, t, co2], dtype=np.float32)
+    votes = {obj: int(agent.predict(obs, deterministic=True)[0]) for obj, agent in agents.items()}
+    weighted_score = 2 * votes.get("comfort", 0) + votes.get("energy", 0) + votes.get("carbon", 0)
+    action = int(weighted_score >= 2)
+    override = None
+
+    if temp > comfort_high:
+        action = 1
+        override = "too_hot"
+    elif temp < comfort_low:
+        action = 0
+        override = "too_cold"
+
+    reasoning = {
+        "votes": votes,
+        "weighted_score": weighted_score,
+        "override": override,
+        "temp": temp,
+        "outdoor_temp": outdoor_temp,
+        "occupancy": occupancy,
+        "comfort_high": comfort_high,
+        "comfort_low": comfort_low,
+    }
+    return action, reasoning
 def joint_decision_with_prediction(temp, outdoor_temp, occupancy_history, t, agents):
     """Same as joint_decision, but uses LSTM-predicted occupancy instead of current occupancy."""
     occupancy_model = OccupancyLSTM()
