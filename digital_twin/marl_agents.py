@@ -16,7 +16,7 @@ class SingleObjectiveWrapper(gym.Wrapper):
     the full blended reward, preventing reward collapse (e.g. all-OFF forever)."""
     WEIGHTS = {
         "energy":  (0.6, 0.2, 0.2),
-        "comfort": (0.2, 0.6, 0.2),
+        "comfort": (0.1, 0.8, 0.1),
         "carbon":  (0.2, 0.2, 0.6),
     }
 
@@ -67,7 +67,7 @@ def train_agent(objective, timesteps=15000, seed=42):
 
 
 def joint_decision(temp, outdoor_temp, occupancy, t, agents, co2=400.0,
-                    comfort_high=27.0, comfort_low=21.0):
+                    comfort_high=26.0, comfort_low=22.0):
     """Weighted agent voting (Comfort weighted 2x) + hard comfort-safety
     override, so the system stays reliable even if a specific agent's
     training didn't fully converge."""
@@ -84,14 +84,14 @@ def joint_decision(temp, outdoor_temp, occupancy, t, agents, co2=400.0,
 
 
 def joint_decision_verbose(temp, outdoor_temp, occupancy, t, agents, co2=400.0,
-                            comfort_high=27.0, comfort_low=21.0):
+                            comfort_high=26.0, comfort_low=22.0):
     """Same logic as joint_decision, but also returns WHY the decision was
     made — per-agent votes, weighted score, and whether the hard comfort
     override fired. Used by xai_explainer.py to generate plain-English
     explanations without duplicating the decision logic."""
     obs = np.array([temp, outdoor_temp, occupancy, t, co2], dtype=np.float32)
     votes = {obj: int(agent.predict(obs, deterministic=True)[0]) for obj, agent in agents.items()}
-    weighted_score = 2 * votes.get("comfort", 0) + votes.get("energy", 0) + votes.get("carbon", 0)
+    weighted_score = votes.get("comfort", 0) + votes.get("energy", 0) + votes.get("carbon", 0)
     action = int(weighted_score >= 2)
     override = None
 
