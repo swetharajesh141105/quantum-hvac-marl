@@ -77,52 +77,31 @@ def generate_co2_placeholder(occupancy: np.ndarray, cfg: dict) -> np.ndarray:
     return baseline + occupancy * bump
 
 
-def generate_day_profile(seed: int = None, cfg: dict = None) -> dict:
-    """
-    Fixed contract: returns a dict of arrays consumed by HVACEnv.
+def generate_day_profile(seed=42):
+    np.random.seed(seed)
+    hours = np.arange(24)
 
-    Keys:
-        outdoor_temp : np.ndarray, shape (n_steps,)
-        occupancy    : np.ndarray, shape (n_steps,)  (0/1)
-        co2          : np.ndarray, shape (n_steps,)  (placeholder)
-        timestamps   : np.ndarray, shape (n_steps,)  (hours, 0..duration)
-        dt           : float, seconds per step
-    """
-    if cfg is None:
-        cfg = load_config()
-    if seed is None:
-        seed = cfg["simulation"]["seed"]
+    # Realistic office occupancy: 8am-6pm, empty for lunch 12-1pm
+    occupancy = np.zeros(24, dtype=int)
+    occupancy[8:12] = 1   # 8am - 12pm
+    occupancy[12] = 0     # lunch break
+    occupancy[13:18] = 1  # 1pm - 6pm
 
-    hours = cfg["simulation"]["duration_hours"]
-    dt = cfg["simulation"]["timestep_seconds"]
+    # Outdoor temp: day/night sine wave, peak ~2pm
+    outdoor_temp = 24 + 8 * np.sin((hours - 6) * np.pi / 12)
+    outdoor_temp = np.clip(outdoor_temp, 18, 36)
 
-    outdoor_temp = generate_outdoor_temp_curve(hours, dt, cfg, seed)
-    occupancy = generate_occupancy_schedule(hours, dt, cfg, seed)
-    co2 = generate_co2_placeholder(occupancy, cfg)
-    n_steps = len(outdoor_temp)
-    timestamps = np.linspace(0, hours, n_steps, endpoint=False)
-
-    return {
-        "outdoor_temp": outdoor_temp,
-        "occupancy": occupancy,
-        "co2": co2,
-        "timestamps": timestamps,
-        "dt": dt,
-    }
+    return {"outdoor_temp": outdoor_temp.tolist(), "occupancy": occupancy.tolist()}
 
 
 if __name__ == "__main__":
-    # Quick sanity check when run standalone
-    cfg = load_config()
-    profile = generate_day_profile(cfg=cfg)
+    profile = generate_day_profile()
 
-    print("Generated day profile:")
-    for key, val in profile.items():
-        if hasattr(val, "shape"):
-            print(f"  {key:12s} shape={val.shape}  min={val.min():.2f}  max={val.max():.2f}")
-        else:
-            print(f"  {key:12s} = {val}")
+    print("timestamp    outdoor_temp    occupancy")
 
-    occ_hours = profile["occupancy"].sum() * (profile["dt"] / 3600)
-    print(f"\nTotal occupied hours: {occ_hours:.1f}h")
-    print(f"Outdoor temp range: {profile['outdoor_temp'].min():.1f}C to {profile['outdoor_temp'].max():.1f}C")
+    for i in range(len(profile["occupancy"])):
+        print(
+            f"{i:02d}:00        "
+            f"{profile['outdoor_temp'][i]:.1f}           "
+            f"{profile['occupancy'][i]}"
+        )
