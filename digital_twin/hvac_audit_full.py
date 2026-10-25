@@ -131,8 +131,7 @@ for obj in ["energy","carbon","comfort"]:
             action=int(agents[obj].predict(obs,deterministic=True)[0])
             temp=model.step(temp,outdoor[t],action,occ,dt=1.0); acts.append(action)
         s.append(savings(np.array(acts)))
-    m,lo,hi = ci95(s)
-    print(f" {obj:<10s} solo savings={m:.1f}% [{lo:.1f},{hi:.1f}]")
+    print(f" {obj:<10s} solo (no safety override) savings={np.mean(s):.1f}% (std {np.std(s):.1f})")
 
 print("\n"+"="*76); print("PART 7: MODEL COMPARISON SUMMARY TABLE"); print("="*76)
 summary = pd.DataFrame({
