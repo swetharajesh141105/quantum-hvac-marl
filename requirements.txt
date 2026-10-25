@@ -1,0 +1,10 @@
+numpy
+scipy
+pandas
+matplotlib
+pyyaml
+gymnasium
+stable-baselines3
+torch
+dimod
+dwave-samplers

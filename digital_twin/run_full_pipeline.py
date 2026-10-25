@@ -28,7 +28,7 @@ def decide(temp, occupied, energy_vote, carbon_vote, comfort_vote=None):
     return 0, "Room empty -> AC OFF."
 
 def run_pipeline():
-    print("=== STEP 1-3: Loading Digital Twin + federated MARL agents ===")
+    print("=== STEP 1-3: Loading Digital Twin + trained MARL agents (single-building) ===")
     model = RoomThermalModel(ROOM_PARAMS)
     agents = {obj: robust_load(obj) for obj in ["energy", "carbon", "comfort"]}
     print("\n=== STEP 4: Deciding hour-by-hour ===")
