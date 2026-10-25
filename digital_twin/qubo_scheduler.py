@@ -22,36 +22,19 @@ def load_federated_agents():
     return agents
 
 def get_preferred_actions(agents):
-    """Run federated agents across a simulated day to get their preferred ON/OFF per hour."""
     profile = generate_day_profile(seed=42)
-    outdoor_temps = profile["outdoor_temp"]
-    occupancy = profile["occupancy"]
-
+    outdoor_temps_full = profile["outdoor_temp"]
+    occupancy_full = profile["occupancy"]
+    step = len(outdoor_temps_full) // HOURS
+    outdoor_temps = [outdoor_temps_full[i * step] for i in range(HOURS)]
+    occupancy = [occupancy_full[i * step] for i in range(HOURS)]
     preferred = []
     temp = 30.0
     for t in range(HOURS):
         action = joint_decision(temp, outdoor_temps[t], occupancy[t], t, agents)
         preferred.append(action)
-        temp += (outdoor_temps[t] - temp) * 0.1 - action * 1.5  # rough temp update for the loop
+        temp += (outdoor_temps[t] - temp) * 0.1 - action * 1.5
     return np.array(preferred)
-
-def build_qubo(preferred_actions, c_energy=0.3, c_deviation=1.0, c_switch=0.5):
-    bqm = dimod.BinaryQuadraticModel(vartype=dimod.BINARY)
-
-    for t in range(HOURS):
-        pref = preferred_actions[t]
-        # energy cost: prefer OFF (x=0) to save energy
-        bqm.add_linear(t, c_energy)
-        # deviation penalty: (x_t - pref)^2 = x_t - 2*pref*x_t + pref^2 -> keep linear part
-        bqm.add_linear(t, c_deviation * (1 - 2 * pref))
-
-    for t in range(HOURS - 1):
-        # switching penalty: (x_t - x_{t+1})^2 = x_t + x_{t+1} - 2*x_t*x_{t+1}
-        bqm.add_linear(t, c_switch)
-        bqm.add_linear(t + 1, c_switch)
-        bqm.add_quadratic(t, t + 1, -2 * c_switch)
-
-    return bqm
 
 def solve_schedule(bqm, num_reads=100):
     sampler = SimulatedAnnealingSampler()
@@ -77,3 +60,17 @@ if __name__ == "__main__":
 
     energy_savings = 100 * (1 - sum(schedule) / HOURS)
     print(f"AC ON hours: {sum(schedule)}/24 | Energy savings vs always-on: {energy_savings:.1f}%")
+import dimod
+
+def build_qubo(preferred_actions, c_energy=0.8, c_deviation=0.3, c_switch=0.4):
+    bqm = dimod.BinaryQuadraticModel(vartype=dimod.BINARY)
+    HOURS = len(preferred_actions)
+    for t in range(HOURS):
+        pref = preferred_actions[t]
+        bqm.add_linear(t, c_energy)
+        bqm.add_linear(t, c_deviation * (1 - 2 * pref))
+    for t in range(HOURS - 1):
+        bqm.add_linear(t, c_switch)
+        bqm.add_linear(t + 1, c_switch)
+        bqm.add_quadratic(t, t + 1, -2 * c_switch)
+    return bqm

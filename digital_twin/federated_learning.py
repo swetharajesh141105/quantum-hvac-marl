@@ -18,9 +18,9 @@ BUILDING_PARAMS = [
 NUM_ROUNDS = 5
 LOCAL_TIMESTEPS = 5000  # more training per round
 
-def create_local_model(objective, room_params, init_state_dict=None):
+def create_local_model(objective, room_params, init_state_dict=None, seed=42):
     env = SingleObjectiveWrapper(HVACEnv(room_params), objective)
-    model = PPO("MlpPolicy", env, verbose=0, ent_coef=0.01)
+    model = PPO("MlpPolicy", env, verbose=0, ent_coef=0.01, seed=seed)
     if init_state_dict is not None:
         model.policy.load_state_dict(init_state_dict)
     return model
