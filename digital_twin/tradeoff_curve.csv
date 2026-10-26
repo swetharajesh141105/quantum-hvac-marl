@@ -1,0 +1,18 @@
+method,kind,cost,carbon,violation_hours
+thermostat 22.0C,thermostat,13.0,4.800000101327896,0.0
+thermostat 22.5C,thermostat,13.0,4.800000101327896,0.0
+thermostat 23.0C,thermostat,13.0,4.800000101327896,0.0
+thermostat 23.5C,thermostat,12.0,4.200000077486038,0.0
+thermostat 24.0C,thermostat,11.0,3.6000000536441803,3.0
+thermostat 24.5C,thermostat,11.0,3.6000000536441803,3.0
+thermostat 25.0C,thermostat,10.0,3.200000047683716,4.0
+thermostat 25.5C,thermostat,9.0,2.8000000417232513,6.0
+thermostat 26.0C,thermostat,9.0,2.8000000417232513,6.0
+thermostat 26.5C,thermostat,7.0,2.0000000298023224,6.0
+thermostat 27.0C,thermostat,6.0,1.600000023841858,6.0
+thermostat 27.5C,thermostat,4.0,1.2000000178813934,6.0
+thermostat 28.0C,thermostat,2.0,0.800000011920929,6.0
+thermostat 28.5C,thermostat,0.0,0.0,6.0
+thermostat 29.0C,thermostat,0.0,0.0,6.0
+MARL (tariff-aware MARL agents),marl,12.0,4.400000095367432,0.0
+MARL + QUBO planner,qubo,10.0,3.6000000834465027,0.0

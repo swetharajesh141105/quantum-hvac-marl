@@ -62,7 +62,7 @@ if __name__ == "__main__":
     print(f"AC ON hours: {sum(schedule)}/24 | Energy savings vs always-on: {energy_savings:.1f}%")
 import dimod
 
-def build_qubo(preferred_actions, c_energy=0.8, c_deviation=0.3, c_switch=0.4):
+def build_qubo(preferred_actions, c_energy=0.3, c_deviation=0.9, c_switch=0.4):
     bqm = dimod.BinaryQuadraticModel(vartype=dimod.BINARY)
     HOURS = len(preferred_actions)
     for t in range(HOURS):
