@@ -1,0 +1,29 @@
+setting,method,cost_Rs_day,uncomfortable_h_day,kWh_day,saving_pct,ci95
+TNERC AC9 perfect-fc,Thermostat,238.5,0.97,25.4,0.0,0.0
+TNERC AC9 perfect-fc,QUBO (SA),222.5,0.70,23.9,6.3,3.0
+TNERC AC9 perfect-fc,Brute-force optimum,213.3,0.97,23.2,10.0,3.7
+Hypothetical AC9 perfect-fc,Thermostat,222.9,0.97,25.4,0.0,0.0
+Hypothetical AC9 perfect-fc,QUBO (SA),187.1,0.87,24.6,15.6,4.5
+Hypothetical AC9 perfect-fc,Brute-force optimum,174.8,0.97,24.0,21.3,3.8
+Flat control AC9 perfect-fc,Thermostat,246.5,0.97,25.4,0.0,0.0
+Flat control AC9 perfect-fc,QUBO (SA),233.4,0.70,24.0,4.7,3.6
+Flat control AC9 perfect-fc,Brute-force optimum,226.1,0.97,23.2,7.7,3.7
+TNERC AC9 fc-error-2C,Thermostat,238.5,0.97,25.4,0.0,0.0
+TNERC AC9 fc-error-2C,QUBO (SA),221.5,1.00,23.9,6.8,3.8
+TNERC AC9 fc-error-2C,Brute-force optimum,207.5,1.73,22.5,12.4,6.1
+TNERC AC12 perfect-fc,Thermostat,250.7,0.53,26.4,0.0,0.0
+TNERC AC12 perfect-fc,QUBO (SA),238.9,0.37,26.0,4.5,2.2
+TNERC AC12 perfect-fc,Brute-force optimum,236.6,0.53,25.8,5.3,2.5
+Hypothetical AC9 fc-error-2C,Thermostat,222.9,0.97,25.4,0.0,0.0
+Hypothetical AC9 fc-error-2C,QUBO (SA),192.6,0.87,25.2,12.9,5.8
+Hypothetical AC9 fc-error-2C,Brute-force optimum,167.6,1.77,23.6,24.4,5.7
+Hypothetical AC12 perfect-fc,Thermostat,228.6,0.53,26.4,0.0,0.0
+Hypothetical AC12 perfect-fc,QUBO (SA),207.6,0.40,27.6,8.8,3.9
+Hypothetical AC12 perfect-fc,Brute-force optimum,189.0,0.53,25.8,17.4,3.1
+breakeven k=0 ratio=1.00,QUBO,,,,3.3,7.3
+breakeven k=0.5 ratio=1.15,QUBO,,,,3.6,6.9
+breakeven k=1 ratio=1.32,QUBO,,,,6.3,5.0
+breakeven k=2 ratio=1.72,QUBO,,,,8.1,4.6
+breakeven k=3 ratio=2.26,QUBO,,,,11.7,4.3
+breakeven k=4 ratio=3.02,QUBO,,,,15.4,4.6
+breakeven k=6 ratio=6.05,QUBO,,,,23.3,6.6

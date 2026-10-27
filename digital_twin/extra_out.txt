@@ -1,0 +1,29 @@
+TNERC AC9 perfect-fc           Thermostat           cost  238.5 uncomf 0.97 kWh  25.4 saving    0.0% +/- 0.0
+TNERC AC9 perfect-fc           QUBO (SA)            cost  222.5 uncomf 0.70 kWh  23.9 saving    6.3% +/- 3.0
+TNERC AC9 perfect-fc           Brute-force optimum  cost  213.3 uncomf 0.97 kWh  23.2 saving   10.0% +/- 3.7
+Hypothetical AC9 perfect-fc    Thermostat           cost  222.9 uncomf 0.97 kWh  25.4 saving    0.0% +/- 0.0
+Hypothetical AC9 perfect-fc    QUBO (SA)            cost  187.1 uncomf 0.87 kWh  24.6 saving   15.6% +/- 4.5
+Hypothetical AC9 perfect-fc    Brute-force optimum  cost  174.8 uncomf 0.97 kWh  24.0 saving   21.3% +/- 3.8
+Flat control AC9 perfect-fc    Thermostat           cost  246.5 uncomf 0.97 kWh  25.4 saving    0.0% +/- 0.0
+Flat control AC9 perfect-fc    QUBO (SA)            cost  233.4 uncomf 0.70 kWh  24.0 saving    4.7% +/- 3.6
+Flat control AC9 perfect-fc    Brute-force optimum  cost  226.1 uncomf 0.97 kWh  23.2 saving    7.7% +/- 3.7
+TNERC AC9 fc-error-2C          Thermostat           cost  238.5 uncomf 0.97 kWh  25.4 saving    0.0% +/- 0.0
+TNERC AC9 fc-error-2C          QUBO (SA)            cost  221.5 uncomf 1.00 kWh  23.9 saving    6.8% +/- 3.8
+TNERC AC9 fc-error-2C          Brute-force optimum  cost  207.5 uncomf 1.73 kWh  22.5 saving   12.4% +/- 6.1
+TNERC AC12 perfect-fc          Thermostat           cost  250.7 uncomf 0.53 kWh  26.4 saving    0.0% +/- 0.0
+TNERC AC12 perfect-fc          QUBO (SA)            cost  238.9 uncomf 0.37 kWh  26.0 saving    4.5% +/- 2.2
+TNERC AC12 perfect-fc          Brute-force optimum  cost  236.6 uncomf 0.53 kWh  25.8 saving    5.3% +/- 2.5
+Hypothetical AC9 fc-error-2C   Thermostat           cost  222.9 uncomf 0.97 kWh  25.4 saving    0.0% +/- 0.0
+Hypothetical AC9 fc-error-2C   QUBO (SA)            cost  192.6 uncomf 0.87 kWh  25.2 saving   12.9% +/- 5.8
+Hypothetical AC9 fc-error-2C   Brute-force optimum  cost  167.6 uncomf 1.77 kWh  23.6 saving   24.4% +/- 5.7
+Hypothetical AC12 perfect-fc   Thermostat           cost  228.6 uncomf 0.53 kWh  26.4 saving    0.0% +/- 0.0
+Hypothetical AC12 perfect-fc   QUBO (SA)            cost  207.6 uncomf 0.40 kWh  27.6 saving    8.8% +/- 3.9
+Hypothetical AC12 perfect-fc   Brute-force optimum  cost  189.0 uncomf 0.53 kWh  25.8 saving   17.4% +/- 3.1
+k=0 ratio=1.00 QUBO 3.3%  optimum 7.0%
+k=0.5 ratio=1.15 QUBO 3.6%  optimum 8.5%
+k=1 ratio=1.32 QUBO 6.3%  optimum 10.1%
+k=2 ratio=1.72 QUBO 8.1%  optimum 13.4%
+k=3 ratio=2.26 QUBO 11.7%  optimum 16.7%
+k=4 ratio=3.02 QUBO 15.4%  optimum 20.2%
+k=6 ratio=6.05 QUBO 23.3%  optimum 27.7%
+saved extra_results.csv and breakeven_final.png
