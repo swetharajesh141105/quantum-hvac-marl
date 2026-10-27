@@ -1,0 +1,36 @@
+nohup: ignoring input
+day 0
+day 1
+day 2
+day 3
+day 4
+day 5
+day 6
+day 7
+day 8
+day 9
+day 10
+day 11
+day 12
+day 13
+day 14
+day 15
+day 16
+day 17
+day 18
+day 19
+day 20
+day 21
+day 22
+day 23
+day 24
+day 25
+day 26
+day 27
+day 28
+day 29
+30 noisy days, assumed tariff. mean +/- 95% CI
+ Thermostat                 cost Rs  68.0 +/- 2.0   violations 1.10 +/- 0.34 h/day
+ MARL (original)            cost Rs  66.5 +/- 2.4   violations 0.83 +/- 0.40 h/day
+ MARL + predictive safety   cost Rs  72.8 +/- 2.1   violations 0.23 +/- 0.20 h/day
+ Tariff-aware QUBO          cost Rs  59.3 +/- 2.9   violations 0.63 +/- 0.33 h/day

@@ -19,7 +19,7 @@ def marl(out, safe):
 def ci(x): return 1.96*np.std(x, ddof=1)/np.sqrt(len(x))
 R = {"Thermostat": [], "MARL (original)": [], "MARL + predictive safety": [], "Tariff-aware QUBO": []}
 for i in range(30):
-    r = np.random.RandomState(i)
+    r = np.random.RandomState(i); print("day", i, flush=True)
     out = [24+8*np.sin((h-6)*np.pi/12)+r.normal(0,1) for h in range(H)]
     b = thermostat(out)
     for k, s in zip(R, [b, marl(out, False), marl(out, True), best_plan(out, simulate(b, out))]):
