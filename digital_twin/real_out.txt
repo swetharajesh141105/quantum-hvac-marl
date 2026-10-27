@@ -1,0 +1,72 @@
+nohup: ignoring input
+30 real days, mean outdoor temp 30.4C, max 40.4C
+day 0
+day 1
+day 2
+day 3
+day 4
+day 5
+day 6
+day 7
+day 8
+day 9
+day 10
+day 11
+day 12
+day 13
+day 14
+day 15
+day 16
+day 17
+day 18
+day 19
+day 20
+day 21
+day 22
+day 23
+day 24
+day 25
+day 26
+day 27
+day 28
+day 29
+
+REAL Vellore weather, forecast error 0.0C, 30 days (mean +/- 95% CI)
+ thermo  cost Rs 99.2 +/- 2.0   violations 6.73 +/- 0.43 h/day
+ qubo    cost Rs 132.1 +/- 5.2   violations 4.10 +/- 0.30 h/day
+ saving from QUBO: -33.1% +/- 4.3
+day 0
+day 1
+day 2
+day 3
+day 4
+day 5
+day 6
+day 7
+day 8
+day 9
+day 10
+day 11
+day 12
+day 13
+day 14
+day 15
+day 16
+day 17
+day 18
+day 19
+day 20
+day 21
+day 22
+day 23
+day 24
+day 25
+day 26
+day 27
+day 28
+day 29
+
+REAL Vellore weather, forecast error 2.0C, 30 days (mean +/- 95% CI)
+ thermo  cost Rs 99.2 +/- 2.0   violations 6.73 +/- 0.43 h/day
+ qubo    cost Rs 132.3 +/- 5.2   violations 4.13 +/- 0.32 h/day
+ saving from QUBO: -33.4% +/- 4.9
